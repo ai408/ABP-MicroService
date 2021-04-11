@@ -16,6 +16,7 @@ namespace BaseService
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
+                // .AddJsonFile("appsettings.Docker.json")
                 .AddEnvironmentVariables()
                 .Build();
 
