@@ -49,8 +49,8 @@ export default {
     return {
       loginForm: {
         tenant: undefined,
-        username: "",
-        password: "",
+        username: "admin",
+        password: "1q2w3E*",
         client_id: config.client.client_id,
         client_secret: config.client.client_secret,
         grant_type: config.client.grant_type,
