@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import componentsRouter from './modules/components'
+import bookRouter from './modules/book'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -264,6 +265,7 @@ export const asyncRoutes = [{
 
   /** when your routing map is too long, you can split it into small modules **/
   componentsRouter,
+  bookRouter,
 
   // 404 page must be placed at the end !!!
   {

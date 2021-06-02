@@ -53,8 +53,13 @@ namespace Business.BookManagement
             Book result = null;
             if (!input.Id.HasValue)
             {
-                input.Id = GuidGenerator.Create();
-                result = await _repository.InsertAsync(ObjectMapper.Map<CreateOrUpdateBookDto, Book>(input));
+                var book = new Book(
+                    GuidGenerator.Create(),
+                    CurrentTenant.Id,
+                    input.Name,
+                    input.Description,
+                    input.Price);
+                result = await _repository.InsertAsync(book);
             }
             else
             {

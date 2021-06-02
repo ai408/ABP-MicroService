@@ -3,6 +3,8 @@ using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Business.Models
 {
     public class Book: AuditedAggregateRoot<Guid>, ISoftDelete, IMultiTenant
@@ -27,7 +29,14 @@ namespace Business.Models
         /// 价格
         /// </summary>
         public int Price { get; set; }
-
         
+        public Book(Guid id, Guid? tenantId, [NotNull] string name, string description, int price)
+        {
+            Id = id;
+            TenantId = tenantId;
+            Name = name;
+            Description = description;
+            Price = price;
+        }
     }
 }
