@@ -1,19 +1,18 @@
 <template>
   <div class="app-container">
     <div class="head-container">
-      <!-- 搜索 -->
-      <el-input v-model="listQuery.Filter" clearable size="small" placeholder="搜索..." style="width: 200px;"
-        class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="handleFilter">搜索
-      </el-button>
-      <div style="padding: 6px 0;">
-        <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @click="handleCreate">新增
-        </el-button>
-        <el-button class="filter-item" size="mini" type="success" icon="el-icon-edit" @click="handleUpdate()">
-          修改</el-button>
-        <el-button slot="reference" class="filter-item" type="danger" icon="el-icon-delete" size="mini"
-          @click="handleDelete()">删除</el-button>
-      </div>
+      <el-form :inline="true" style="margin:0 20px;">
+        <el-form-item label="书名">
+          <el-input placeholder="请输入" style="width: 200px;" class="filter-item" v-model="listQuery.FilterName" @keyup.enter.native="handleFilter" size="small" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="描述">
+          <el-input placeholder="请输入" style="width: 200px;" class="filter-item" v-model="listQuery.FilterDescription" @keyup.enter.native="handleFilter" size="small" clearable></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+          <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @click="handleCreate">新增</el-button>
+        </el-form-item>
+      </el-form>
     </div>
     <el-dialog :visible.sync="dialogFormVisible" :close-on-click-modal="false" @close="cancel()"
       :title="formTitle">
@@ -33,21 +32,22 @@
         <el-button size="small" v-loading="formLoading" type="primary" @click="save">确认</el-button>
       </div>
     </el-dialog>
-    <el-table ref="multipleTable" v-loading="listLoading" :data="list" size="small" style="width: 90%;"
+    <el-table ref="multipleTable" v-loading="listLoading" :data="list" size="small" style="width: 100%;"
       @sort-change="sortChange" @selection-change="handleSelectionChange" @row-click="handleRowClick">
-      <el-table-column type="selection" width="44px"></el-table-column>
+      <el-table-column type="index" width="50" align="center"></el-table-column>
       <el-table-column label="书名" prop="name" align="center" />
       <el-table-column label="描述" prop="description" align="center" />
       <el-table-column label="价格" prop="price" align="center" />
       <el-table-column label="操作" align="center">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit" />
-          <el-button type="danger" size="mini" @click="handleDelete(row)" icon="el-icon-delete" />
+          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit">编辑</el-button>
+          <el-button type="danger" size="mini" @click="handleDelete(row)" icon="el-icon-delete">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="totalCount>0" :total="totalCount" :page.sync="page"
-      :limit.sync="listQuery.MaxResultCount" @pagination="getList" />
+    <div class="page">
+      <pagination v-show="totalCount>0" :total="totalCount" :page.sync="page" :limit.sync="listQuery.MaxResultCount" @pagination="getList" />
+    </div>
   </div>
 </template>
 <script>
@@ -81,7 +81,8 @@ export default {
       listLoading: true,
       formLoading: false,
       listQuery: {
-        Filter: '',
+        FilterName: '',
+        FilterDescription: '',
         Sorting: '',
         SkipCount: 0,
         MaxResultCount: 10
@@ -250,7 +251,12 @@ export default {
     },
   }
 }
-
 </script>
-<style>
+
+<style lang="scss" scoped>
+.page {
+  display: block;
+  text-align: right;
+  padding: 5px 2px 0 0;
+}
 </style>

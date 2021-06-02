@@ -5,6 +5,7 @@ namespace Business.BookManagement.Dto
 {
     public class GetBookInputDto : PagedAndSortedResultRequestDto
     {
-        public string Filter { get; set; }
+        public string FilterName { get; set; }
+        public string FilterDescription { get; set; }
     }
 }

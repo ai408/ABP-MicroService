@@ -38,7 +38,8 @@ namespace Business.BookManagement
 
         public async Task<PagedResultDto<BookDto>> GetAll(GetBookInputDto input)
         {
-            var query = _repository.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), a => a.Name.Contains(input.Filter));
+            var query = _repository.WhereIf(!string.IsNullOrWhiteSpace(input.FilterName), a => a.Name.Contains(input.FilterName))
+                .WhereIf(!string.IsNullOrWhiteSpace(input.FilterDescription), a => a.Name.Contains(input.FilterDescription));
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderBy(input.Sorting ?? "Id")
