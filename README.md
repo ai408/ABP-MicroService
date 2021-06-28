@@ -3,6 +3,10 @@
 
 **文档地址： https://xucz.vip:9001/**
 
+**GitHub： https://github.com/WilliamXu96/ABP-MicroService/**
+
+**Gitee： https://gitee.com/Bossxu666/abp-microservice**
+
 
 **博客地址：** [博客园](https://www.cnblogs.com/william-xu/)
 
