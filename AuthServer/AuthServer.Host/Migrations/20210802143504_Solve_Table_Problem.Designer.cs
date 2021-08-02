@@ -4,15 +4,17 @@ using AuthServer.Host.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace AuthServer.Host.Migrations
 {
     [DbContext(typeof(AuthServerDbContext))]
-    partial class AuthServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210802143504_Solve_Table_Problem")]
+    partial class Solve_Table_Problem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
