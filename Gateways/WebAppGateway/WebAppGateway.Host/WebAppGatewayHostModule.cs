@@ -11,6 +11,7 @@ using Ocelot.Middleware;
 using StackExchange.Redis;
 using System;
 using System.Linq;
+using Microsoft.IdentityModel.Logging;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
@@ -73,6 +74,7 @@ namespace WebAppGateway
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "WebAppGateway";
                 });
+            IdentityModelEventSource.ShowPII = true;
         }
 
         private static void ConfigureSwaggerServices(ServiceConfigurationContext context)
