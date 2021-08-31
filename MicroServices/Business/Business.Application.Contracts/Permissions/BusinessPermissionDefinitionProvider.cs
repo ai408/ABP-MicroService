@@ -18,6 +18,10 @@ namespace Business.Permissions
             Book.AddChild(BusinessPermissions.Book.Create, L("Create"));
 
             //Code generation...
+            var TemHum = business.AddPermission(BusinessPermissions.TemHum.Default, L("TemHum"));
+            TemHum.AddChild(BusinessPermissions.TemHum.Update, L("Edit"));
+            TemHum.AddChild(BusinessPermissions.TemHum.Delete, L("Delete"));
+            TemHum.AddChild(BusinessPermissions.TemHum.Create, L("Create"));
         }
 
         private static LocalizableString L(string name)

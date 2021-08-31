@@ -23,6 +23,11 @@ namespace Business.EntityFrameworkCore
             });
 
             //Code generation...
+            builder.Entity<TemHum>(b =>
+            {
+                b.ToTable("TemHum");
+                b.ConfigureByConvention();
+            });
         }
     }
 }

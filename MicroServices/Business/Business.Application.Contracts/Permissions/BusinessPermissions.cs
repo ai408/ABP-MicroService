@@ -17,5 +17,12 @@ namespace Business.Permissions
         }
 
         //Code generation...
+        public static class TemHum
+        {
+            public const string Default = Business + ".TemHum";
+            public const string Delete = Default + ".Delete";
+            public const string Update = Default + ".Update";
+            public const string Create = Default + ".Create";
+        }
     }
 }
