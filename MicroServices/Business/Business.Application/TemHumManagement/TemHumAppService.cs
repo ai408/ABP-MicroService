@@ -10,6 +10,8 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Business.TemHumManagement.Dto;
 using Business.Models;
+using Business.Permissions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Business.TemHumManagement
 {

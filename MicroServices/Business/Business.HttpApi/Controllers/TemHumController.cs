@@ -23,6 +23,7 @@ namespace Business.Controllers
         }
 
         [HttpPost]
+        [HttpPut]
         public Task<TemHumDto> CreateOrUpdate(CreateOrUpdateTemHumDto input)
         {
             return _TemHumAppService.CreateOrUpdate(input);

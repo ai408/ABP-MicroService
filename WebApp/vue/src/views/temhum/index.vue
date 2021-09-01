@@ -40,7 +40,7 @@
       <el-table-column label="备注" prop="remark" align="center" />
       <el-table-column label="操作" align="center">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit">编辑</el-button>
+          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit" disabled="true">编辑</el-button>
           <el-button type="danger" size="mini" @click="handleDelete(row)" icon="el-icon-delete">删除</el-button>
         </template>
       </el-table-column>
@@ -82,8 +82,8 @@ export default {
       listLoading: true,
       formLoading: false,
       listQuery: {
-        FilterTem: '',
-        FilterHum: '',
+        FilterTem: '0',
+        FilterHum: '0',
         Sorting: '',
         SkipCount: 0,
         MaxResultCount: 10
@@ -97,7 +97,9 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
+  created() {
+    this.getList();
+  },
   mounted() {},
   methods: {
     getList() {
@@ -128,7 +130,7 @@ export default {
       let alert = '';
       if (row) {
         params.push(row.id);
-        alert = row.name;
+        alert = row.remark;
       }
       else {
         if (this.multipleSelection.length === 0) {
@@ -149,7 +151,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$axios.posts('Form', params).then(response => {
+        this.$axios.posts('/api/business/TemHum/delete', params).then(response => {
           this.$notify({
             title: '成功',
             message: '删除成功',
@@ -166,7 +168,7 @@ export default {
       });
     },
     handleUpdate(row) {
-      this.formTitle = '修改Form';
+      this.formTitle = '修改TemHum';
       this.isEdit = true;
       if (row) {
         this.fetchData(row.id);
