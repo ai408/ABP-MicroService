@@ -22,8 +22,13 @@ namespace Business.Permissions
             TemHum.AddChild(BusinessPermissions.TemHum.Update, L("Edit"));
             TemHum.AddChild(BusinessPermissions.TemHum.Delete, L("Delete"));
             TemHum.AddChild(BusinessPermissions.TemHum.Create, L("Create"));
+            
+            var Novel = business.AddPermission(BusinessPermissions.Novel.Default, L("Novel"));
+            Novel.AddChild(BusinessPermissions.Novel.Update, L("Edit"));
+            Novel.AddChild(BusinessPermissions.Novel.Delete, L("Delete"));
+            Novel.AddChild(BusinessPermissions.Novel.Create, L("Create"));
         }
-
+        
         private static LocalizableString L(string name)
         {
             return LocalizableString.Create<BusinessResource>(name);
