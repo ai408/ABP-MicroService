@@ -277,6 +277,7 @@ export const asyncRoutes = [{
   componentsRouter,
   bookRouter,
   videoRouter,
+  novelRouter,
 
   // 404 page must be placed at the end !!!
   {

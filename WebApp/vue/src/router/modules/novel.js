@@ -2,23 +2,23 @@
 
 import Layout from '@/layout'
 
-const bookRouter = {
-  path: '/book',
+const novelRouter = {
+  path: '/novel',
   component: Layout,
   redirect: 'noRedirect',
-  name: 'book',
+  name: 'novel',
   meta: {
-    title: '书籍操作',
+    title: '小说操作',
     icon: 'component'
   },
   children: [
     {
-      path: 'book',
-      component: () => import('@/views/book/index'),
-      name: 'book',
-      meta: { title: '书籍操作' }
+      path: 'novel',
+      component: () => import('@/views/novel/index'),
+      name: 'novel',
+      meta: { title: '小说操作' }
     },
   ]
 }
 
-export default bookRouter
+export default novelRouter

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+<div class="app-container">
     <div class="head-container">
       <el-form :inline="true" style="margin:0 20px;">
         <el-form-item label="书名">
@@ -60,7 +60,7 @@ const defaultForm = {
   price: null,
 }
 export default {
-  name: 'Book',
+  name: 'Novel',
   components: {
     Pagination
   },
@@ -104,14 +104,14 @@ export default {
     getList() {
       this.listLoading = true;
       this.listQuery.SkipCount = (this.page - 1) * this.listQuery.MaxResultCount;
-      this.$axios.gets('/api/business/book', this.listQuery).then(response => {
+      this.$axios.gets('/api/business/novel', this.listQuery).then(response => {
         this.list = response.items;
         this.totalCount = response.totalCount;
         this.listLoading = false;
       });
     },
     fetchData(id) {
-      this.$axios.gets('/api/business/book/' + id).then(response => {
+      this.$axios.gets('/api/business/novel/' + id).then(response => {
         this.form = response;
       });
     },
@@ -120,7 +120,7 @@ export default {
       this.getList();
     },
     handleCreate() {
-      this.formTitle = '新增Book';
+      this.formTitle = '新增Novel';
       this.isEdit = false;
       this.dialogFormVisible = true;
     },
@@ -150,7 +150,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$axios.posts('/api/business/book/delete', params).then(response => {
+        this.$axios.posts('/api/business/novel/delete', params).then(response => {
           this.$notify({
             title: '成功',
             message: '删除成功',
@@ -167,7 +167,7 @@ export default {
       });
     },
     handleUpdate(row) {
-      this.formTitle = '修改Book';
+      this.formTitle = '修改Novel';
       this.isEdit = true;
       if (row) {
         this.fetchData(row.id);
@@ -193,7 +193,7 @@ export default {
           this.formLoading = true;
           this.form.roleNames = this.checkedRole;
           if (this.isEdit) {
-            this.$axios.puts('/api/business/book/' + this.form.id, this.form).then(response => {
+            this.$axios.puts('/api/business/novel/' + this.form.id, this.form).then(response => {
               this.formLoading = false;
               this.$notify({
                 title: '成功',
@@ -208,7 +208,7 @@ export default {
             });
           }
           else {
-            this.$axios.posts('/api/business/book', this.form).then(response => {
+            this.$axios.posts('/api/business/novel', this.form).then(response => {
               this.formLoading = false;
               this.$notify({
                 title: '成功',
