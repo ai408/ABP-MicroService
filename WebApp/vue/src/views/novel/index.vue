@@ -40,7 +40,7 @@
       <el-table-column label="价格" prop="price" align="center" />
       <el-table-column label="操作" align="center">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit" disabled="true">编辑</el-button>
+          <el-button type="primary" size="mini" @click="handleUpdate(row)" icon="el-icon-edit">编辑</el-button>
           <el-button type="danger" size="mini" @click="handleDelete(row)" icon="el-icon-delete">删除</el-button>
         </template>
       </el-table-column>

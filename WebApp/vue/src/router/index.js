@@ -10,6 +10,7 @@ import Layout from '@/layout'
 import componentsRouter from './modules/components'
 import bookRouter from './modules/book'
 import videoRouter from './modules/video'
+import novelRouter from './modules/novel'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1

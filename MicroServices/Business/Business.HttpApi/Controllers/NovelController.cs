@@ -29,9 +29,10 @@ namespace Business.Controllers
         }
 
         [HttpPut]
-        public Task<NovelDto> Update(NovelUpdateDto input)
+        [Route("{id}")]
+        public Task<NovelDto> Update(Guid id, NovelUpdateDto input)
         {
-            return _NovelAppService.Update(input);
+            return _NovelAppService.Update(id, input);
         }
         
         [HttpPost]

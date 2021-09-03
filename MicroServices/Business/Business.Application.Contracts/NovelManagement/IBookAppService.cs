@@ -12,7 +12,7 @@ namespace Business.NovelManagement
         Task<NovelDto> Get(Guid id);
         Task<PagedResultDto<NovelDto>> GetAll(GetNovelInputDto input);
         Task<NovelDto> Create(NovelCreateDto input);
-        Task<NovelDto> Update(NovelUpdateDto input);
+        Task<NovelDto> Update(Guid id, NovelUpdateDto input);
         Task Delete(List<Guid> ids);
     }
 }

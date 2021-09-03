@@ -28,6 +28,13 @@ namespace Business.EntityFrameworkCore
                 b.ToTable("TemHum");
                 b.ConfigureByConvention();
             });
+            
+            builder.Entity<Novel>(b =>
+            {
+                b.ToTable("Novel");
+                b.ConfigureByConvention();
+                b.Property(x => x.Name).IsRequired();
+            });
         }
     }
 }

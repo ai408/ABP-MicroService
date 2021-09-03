@@ -12,7 +12,7 @@ using Business.NovelManagement.Dto;
 
 namespace Business.NovelManagement
 {
-    //[Authorize(BusinessPermissions.Book.Default)]
+    //[Authorize(BusinessPermissions.Novel.Default)]
     public class NovelAppService : ApplicationService,INovelAppService
     {
         private IRepository<Novel, Guid> _repository;
@@ -61,14 +61,13 @@ namespace Business.NovelManagement
             return ObjectMapper.Map<Novel, NovelDto>(result);
         }
         
-        public async Task<NovelDto> Update(NovelUpdateDto input)
+        public async Task<NovelDto> Update(Guid id, NovelUpdateDto input)
         {
-            Novel result = null;
-            if (input.Id.HasValue)
-            {
-                var data = await _repository.GetAsync(input.Id.Value);
-                result = await _repository.UpdateAsync(ObjectMapper.Map(input, data));
-            }
+            var data = await _repository.GetAsync(id);
+            data.Name = input.Name;
+            data.Description = input.Description;
+            data.Price = input.Price;
+            var result = await _repository.UpdateAsync(data);
             return ObjectMapper.Map<Novel, NovelDto>(result);
         }
         

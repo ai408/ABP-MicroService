@@ -10,6 +10,7 @@ namespace Business.EntityFrameworkCore
     {
         public DbSet<Book> Book { get; set; }
         public DbSet<TemHum> TemHum { get; set; }
+        public DbSet<Novel> Novel { get; set; }
 
         //Code generation...
         public BusinessDbContext(DbContextOptions<BusinessDbContext> options)
