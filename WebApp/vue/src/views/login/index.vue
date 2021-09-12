@@ -2,7 +2,7 @@
     <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="0px" class="login-form">
       <h3 class="title">
-        ABP-MicroService 后台登录
+        预测性维护系统
       </h3>
       <el-form-item prop="tenant">
         <el-input v-model="loginForm.tenant" type="text" auto-complete="off" placeholder="租户">
