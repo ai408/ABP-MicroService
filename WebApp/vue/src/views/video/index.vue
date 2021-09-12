@@ -4,7 +4,7 @@
       <el-row>
         <el-card class="box-card" style="text-align:left" >
           <div slot="header" class="clearfix title">
-            <span>播放列表音频可视化演示例子</span>
+            <span>播放列表音频可视化演示例子，预测结果：{{predict_result}}</span>
           </div>
           <div id="waveform" ref="waveform">
           </div>
@@ -32,30 +32,31 @@
         width="360">
         <template slot-scope="scope">
           <i class="el-icon-caret-left"></i>
-          <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          <span style="margin-left: 10px">{{ scope.row.filename }}</span>
         </template>
       </el-table-column>
       <el-table-column
         label="标签"
         width="360">
         <template slot-scope="scope">
-          <el-popover trigger="hover" placement="top">
-            <p>姓名: {{ scope.row.name }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.name }}</el-tag>
-            </div>
-          </el-popover>
+          <el-tag size="medium">{{ scope.row.label }}</el-tag>
+<!--          <el-popover trigger="hover" placement="top">-->
+<!--            <p>姓名: {{ scope.row.name }}</p>-->
+<!--            <div slot="reference" class="name-wrapper">-->
+<!--              <el-tag size="medium">{{ scope.row.name }}</el-tag>-->
+<!--            </div>-->
+<!--          </el-popover>-->
         </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            type="info"
+            type="primary"
             @click="handleChange(scope.$index, scope.row)">切换</el-button>
           <el-button
             size="mini"
-            type="info"
+            type="primary"
             @click="handlePredict(scope.$index, scope.row)">预测</el-button>
         </template>
       </el-table-column>
@@ -109,22 +110,25 @@ export default {
       isEdit: false,
       wavesurfer: null,
       tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        filename: '14111-4-0-5.wav',
+        label: '钻孔',
       }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
+        filename: '14114-4-0-0.wav',
+        label: '钻孔',
       }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
+        filename: '14114-4-0-2.wav',
+        label: '钻孔',
+      },{
+        filename: '22883-7-0-0.wav',
+        label: '凿岩',
       }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+        filename: '22883-7-1-0.wav',
+        label: '凿岩',
+      }, {
+        filename: '22883-7-7-0.wav',
+        label: '凿岩',
+      }],
+      predict_result: "",
     }
   },
   computed: {},
@@ -150,7 +154,7 @@ export default {
         ]
       });
       // 特别提醒：此处需要使用require(相对路径)，否则会报错
-      this.wavesurfer.load(require('./peaks/sample.mp3'));
+      this.wavesurfer.load(require('./peaks/14111-4-0-5.wav'));
     })
   },
   methods: {
@@ -167,15 +171,26 @@ export default {
         this.wavesurfer.skip(3)
       },
       handleChange(index, row) {
-        if (index === 0)
-          this.wavesurfer.load(require('./peaks/demo.wav'));
         if (index === 1)
-          this.wavesurfer.load(require('./peaks/001z.mp3'));
+          this.wavesurfer.load(require('./peaks/14111-4-0-5.wav'));
         if (index === 2)
-          this.wavesurfer.load(require('./peaks/media.wav'));
+          this.wavesurfer.load(require('./peaks/14114-4-0-0.wav'));
+        if (index === 3)
+          this.wavesurfer.load(require('./peaks/14114-4-0-2.wav'));
+        if (index === 4)
+          this.wavesurfer.load(require('./peaks/22883-7-0-0.wav'));
+        if (index === 5)
+          this.wavesurfer.load(require('./peaks/22883-7-1-0.wav'));
+        if (index === 6)
+          this.wavesurfer.load(require('./peaks/22883-7-7-0.wav'));
       },
       handlePredict(index, row) {
-        console.log(index, row);
+        this.listLoading = true;
+        let filename = JSON.parse(JSON.stringify(row))["filename"];
+        this.$axios.gets('http://127.0.0.1:5000/predict?filename='+filename).then(response => {
+          this.predict_result = response.result;
+          this.listLoading = false;
+        });
       },
       getList() {
       this.listLoading = true;
